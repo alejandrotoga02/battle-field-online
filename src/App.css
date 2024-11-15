@@ -1,38 +1,106 @@
-.App {
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  margin: 0;
+  background-image: url('https://wallpapers.com/images/high/pokemon-battle-background-1152-x-2048-ods105cyg1bxf1k9.webp'); /* Cambia esta URL por la imagen deseada */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.game-area {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.board {
+  display: grid;
+  grid-template-areas:
+    "active"
+    "bench";
+  gap: 10px;
+  width: 60vw;
+  max-width: 600px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #333;
+}
+
+.zone {
+  background-color: #fff;
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.active {
+  grid-area: active;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.bench {
+  grid-area: bench;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  gap: 10px;
+}
+
+.pokemon-card {
+  width: 60px;
+  height: 90px;
+  background-color: #ffeb3b;
+  border: 1px solid #333;
+  border-radius: 5px;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  font-size: 12px;
+  color: #333;
+}
+
+.player-label {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+  font-size: 20px;
+}
+
+.player2 {
+  background-color: #FF7043; /* Color diferente para el Jugador 2 */
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.name-input {
+  font-size: 18px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  border: 2px solid #333;
+  margin-bottom: 15px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.damage-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.damage-button:hover {
+  background-color: #e64a19;
 }
