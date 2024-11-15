@@ -1,14 +1,44 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PokemonCard from "./PokemonCard";
+import {
+  setPlayerName,
+  setOpponentName,
+  addPlayerDamage,
+  addOpponentDamage,
+} from "./store";
 
-function GameBoard({
-  playerName,
-  opponentName,
-  playerDamage,
-  opponentDamage,
-  handleNameChange,
-  addDamage,
-}) {
+function GameBoard() {
+  const dispatch = useDispatch();
+
+  // Obtener el estado global de Redux
+  const {
+    playerName,
+    opponentName,
+    playerPokemon,
+    opponentPokemon,
+    playerDamage,
+    opponentDamage,
+  } = useSelector((state) => state);
+
+  // Función para cambiar el nombre del jugador
+  const handleNameChange = (player, name) => {
+    if (player === "player") {
+      dispatch(setPlayerName(name));
+    } else if (player === "opponent") {
+      dispatch(setOpponentName(name));
+    }
+  };
+
+  // Función para agregar daño
+  const handleAddDamage = (player) => {
+    if (player === "player") {
+      dispatch(addPlayerDamage(10));
+    } else if (player === "opponent") {
+      dispatch(addOpponentDamage(10));
+    }
+  };
+
   return (
     <div className="game-area">
       {/* Tablero del Jugador */}
@@ -24,7 +54,7 @@ function GameBoard({
         {/* Pokémon Activo */}
         <div className="zone active">
           <h3>Pokémon Activo</h3>
-          <PokemonCard name="Charizard" damage={playerDamage} />
+          <PokemonCard name={playerPokemon} damage={playerDamage} />
         </div>
 
         {/* Banca */}
@@ -37,7 +67,10 @@ function GameBoard({
           <PokemonCard name="Eevee" damage={0} />
         </div>
         {/* Botón para agregar daño */}
-        <button className="damage-button" onClick={() => addDamage("player")}>
+        <button
+          className="damage-button"
+          onClick={() => handleAddDamage("player")}
+        >
           Agregar Daño
         </button>
       </div>
@@ -55,7 +88,7 @@ function GameBoard({
         {/* Pokémon Activo */}
         <div className="zone active">
           <h3>Pokémon Activo</h3>
-          <PokemonCard name="Machamp" damage={opponentDamage} />
+          <PokemonCard name={opponentPokemon} damage={opponentDamage} />
         </div>
 
         {/* Banca */}
@@ -68,7 +101,10 @@ function GameBoard({
           <PokemonCard name="Nidoking" damage={0} />
         </div>
         {/* Botón para agregar daño */}
-        <button className="damage-button" onClick={() => addDamage("opponent")}>
+        <button
+          className="damage-button"
+          onClick={() => handleAddDamage("opponent")}
+        >
           Agregar Daño
         </button>
       </div>
